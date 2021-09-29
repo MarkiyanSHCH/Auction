@@ -1,0 +1,27 @@
+create table Categories(
+Id int identity PRIMARY KEY,
+Name varchar(500)
+)
+
+create table Users(
+Id int identity PRIMARY KEY,
+[Name] varchar(500) NOT NULL,
+[Role] varchar(500),
+[Login] varchar(500) NOT NULL,
+[Password] varchar(500) NOT NULL
+)
+
+
+create table Products(
+Id int identity PRIMARY KEY,
+[Name] varchar(500),
+[Description] varchar(500),
+Photo varchar(500),
+FixPrice float,
+AuctionPrice float,
+Sell bit,
+StartDate date,
+EndDate date,
+CategoryId int FOREIGN KEY REFERENCES Categories(Id),
+UserId int FOREIGN KEY REFERENCES Users(Id),
+)
