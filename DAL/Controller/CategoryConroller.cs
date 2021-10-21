@@ -1,38 +1,37 @@
-﻿using CourseProject.EF;
-using CourseProject.Interface;
-using CourseProject.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CourseProject.Controller
+using DAL.EF;
+using DAL.Interface;
+using Domain.Models;
+using DTO.Models;
+
+namespace DAL.Controller
 {
-    class CategoryController : IController<Category>
+    public class CategoryController : IController<Category>
     {
         public Category Get(int id)
         {
             using (AuctionContext db = new AuctionContext())
             {
-                return db.Categories.Find(id);
+                return db.Categories.Find(id).MapTo();
             }
         }
         public List<Category> GetAll()
         {
             using (AuctionContext db = new AuctionContext())
             {
-                //if (db.Categories.Count() == 0)
-                //{
-                   
-                //}
-                return db.Categories.ToList();
+                return db.Categories.AsEnumerable().Select(dto => dto.MapTo()).ToList();
             }
         }
-        public void Create(Category tmp)
+        public Category Create(Category tmp)
         {
             using (AuctionContext db = new AuctionContext())
             {
-                db.Categories.Add(tmp);
+                db.Categories.Add(CategoryDto.MapBack(tmp));
                 db.SaveChanges();
             }
+            return tmp;
         }
         public void Update(int id, Category tmp)
         {
@@ -40,6 +39,7 @@ namespace CourseProject.Controller
             {
                 var cat = db.Categories.Where(x => x.Id == id).SingleOrDefault();
                 cat.Name = tmp.Name;
+                cat.RowUpdateTime = tmp.RowUpdateTime;
                 db.SaveChanges();
             }
         }

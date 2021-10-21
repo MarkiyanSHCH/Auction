@@ -1,40 +1,61 @@
-﻿using CourseProject.EF;
-using CourseProject.Interface;
-using CourseProject.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CourseProject.Controller
+using Microsoft.EntityFrameworkCore;
+
+using DAL.EF;
+using DAL.Interface;
+using Domain.Models;
+using DTO.Models;
+
+namespace DAL.Controller
 {
-    class ProductController: IController<Product>
+    public class ProductController : IController<Product>
     {
         public Product Get(int id)
         {
             using (AuctionContext db = new AuctionContext())
             {
-                return db.Products.Find(id);
+                return db.Products.Find(id).MapTo();
+            }
+        }
+        public List<Product> GetByCategory(int id)
+        {
+            using (AuctionContext db = new AuctionContext())
+            {
+                Microsoft.Data.SqlClient.SqlParameter param = new Microsoft.Data.SqlClient.SqlParameter("@id", id);
+                return db.Products.FromSqlRaw("ReadProductsByCategory @id", param).AsEnumerable().Select(dto => dto.MapTo()).ToList();
+            }
+        }
+        public List<Product> GetByUser(int id)
+        {
+            using (AuctionContext db = new AuctionContext())
+            {
+                Microsoft.Data.SqlClient.SqlParameter param = new Microsoft.Data.SqlClient.SqlParameter("@id", id);
+                return db.Products.FromSqlRaw("ReadProductsByUser @id", param).AsEnumerable().Select(dto => dto.MapTo()).ToList();
             }
         }
         public List<Product> GetAll()
         {
             using (AuctionContext db = new AuctionContext())
             {
-                return db.Products.ToList();
+                return db.Products.AsEnumerable().Select(dto => dto.MapTo()).ToList();
             }
         }
-        public void Create(Product tmp)
+        public Product Create(Product tmp)
         {
             using (AuctionContext db = new AuctionContext())
             {
-                db.Products.Add(tmp);
+                db.Products.Add(ProductDto.MapBack(tmp));
                 db.SaveChanges();
             }
+            return tmp;
         }
         public void Update(int id, Product tmp)
         {
             using (AuctionContext db = new AuctionContext())
             {
-                Product prod = db.Products.Where(x => x.Id == id).SingleOrDefault();
+                ProductDto prod = db.Products.Where(x => x.Id == id).SingleOrDefault();
                 prod.Name = tmp.Name;
                 prod.Description = tmp.Description;
                 prod.Photo = tmp.Photo;

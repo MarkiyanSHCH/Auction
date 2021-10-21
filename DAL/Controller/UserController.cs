@@ -1,10 +1,12 @@
-﻿using CourseProject.EF;
-using CourseProject.Interface;
-using CourseProject.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CourseProject.Controller
+using DAL.EF;
+using DAL.Interface;
+using Domain.Models;
+using DTO.Models;
+
+namespace DAL.Controller
 {
     public class UserController : IController<User>
     {
@@ -12,29 +14,30 @@ namespace CourseProject.Controller
         {
             using (AuctionContext db = new AuctionContext())
             {
-                return db.Users.Find(id);
+                return db.Users.Find(id).MapTo();
             }
         }
         public List<User> GetAll()
         {
             using (AuctionContext db = new AuctionContext())
             {
-                return db.Users.ToList();
+                return db.Users.AsEnumerable().Select(dto => dto.MapTo()).ToList();
             }
         }
-        public void Create(User tmp)
+        public User Create(User tmp)
         {
             using (AuctionContext db = new AuctionContext())
             {
-                db.Users.Add(tmp);
+                db.Users.Add(UserDto.MapBack(tmp));
                 db.SaveChanges();
             }
+            return tmp;
         }
         public void Update(int id, User tmp)
         {
             using (AuctionContext db = new AuctionContext())
             {
-                User user = db.Users.Where(x => x.Id == id).SingleOrDefault();
+                UserDto user = db.Users.Where(x => x.Id == id).SingleOrDefault();
                 user.Name = tmp.Name;
                 user.Role = tmp.Role;
                 user.Login = tmp.Login;

@@ -1,10 +1,10 @@
-﻿using CourseProject.Controller;
-using CourseProject.Models;
-using System;
+﻿using System;
+
+using Domain.Models;
+using DAL.Controller;
 
 namespace DZ
 {
-
     class Program
     {
         static void Main(string[] args)
