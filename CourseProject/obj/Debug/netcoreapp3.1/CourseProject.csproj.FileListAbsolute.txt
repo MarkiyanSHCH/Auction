@@ -158,3 +158,5 @@ C:\Users\Macbook\Desktop\CourseProject\CourseProject\obj\Debug\netcoreapp3.1\Cou
 C:\Users\Macbook\Desktop\CourseProject\CourseProject\obj\Debug\netcoreapp3.1\CourseProject.dll
 C:\Users\Macbook\Desktop\CourseProject\CourseProject\obj\Debug\netcoreapp3.1\CourseProject.pdb
 C:\Users\Macbook\Desktop\CourseProject\CourseProject\obj\Debug\netcoreapp3.1\CourseProject.genruntimeconfig.cache
+C:\Users\Macbook\Desktop\CourseProject\CourseProject\bin\Debug\netcoreapp3.1\BLL.dll
+C:\Users\Macbook\Desktop\CourseProject\CourseProject\bin\Debug\netcoreapp3.1\BLL.pdb

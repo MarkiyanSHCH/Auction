@@ -12,9 +12,9 @@ namespace DZ
             menu();
             void menu()
             {
-                ProductController pr = new ProductController();
-                CategoryController cr = new CategoryController();
-                UserController us = new UserController();
+                ProductRepository pr = new ProductRepository();
+                CategoryRepository cr = new CategoryRepository();
+                UserRepository us = new UserRepository();
 
                 short userInput = 0;
                 while (true)

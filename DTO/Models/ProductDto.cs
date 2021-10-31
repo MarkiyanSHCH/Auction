@@ -18,7 +18,7 @@ namespace DTO.Models
         public DateTime? StartDate { get; set; }
         [Column(TypeName = "Date")]
         public DateTime? EndDate { get; set; }
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public int? UserId { get; set; }
         [Column(TypeName = "Date")]
         public DateTime RowInsertTime { get; set; }

@@ -17,7 +17,7 @@ namespace UnitTests
         [OneTimeSetUp]
         public void InitialSetupTest()
         {
-            userRep = new UserController();
+            userRep = new UserRepository();
         }
 
         [Test]

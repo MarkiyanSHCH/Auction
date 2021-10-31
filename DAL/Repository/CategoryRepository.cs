@@ -8,7 +8,7 @@ using DTO.Models;
 
 namespace DAL.Controller
 {
-    public class CategoryController : IController<Category>
+    public class CategoryRepository : ICategoryRepository
     {
         public Category Get(int id)
         {

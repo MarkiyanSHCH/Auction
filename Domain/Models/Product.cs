@@ -14,7 +14,7 @@ namespace Domain.Models
         public bool? Sell {  get; set; }
         public DateTime? StartDate {  get; set; }
         public DateTime? EndDate {  get; set; }
-        public int? CategoryId {  get; set; }
+        public int CategoryId {  get; set; }
         public int? UserId {  get; set; }
         public DateTime RowInsertTime { get; set; }
         public DateTime RowUpdateTime { get; set; }

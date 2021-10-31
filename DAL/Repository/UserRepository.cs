@@ -5,10 +5,11 @@ using DAL.EF;
 using DAL.Interface;
 using Domain.Models;
 using DTO.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Controller
 {
-    public class UserController : IController<User>
+    public class UserRepository : IUserRepository
     {
         public User Get(int id)
         {
@@ -22,6 +23,15 @@ namespace DAL.Controller
             using (AuctionContext db = new AuctionContext())
             {
                 return db.Users.AsEnumerable().Select(dto => dto.MapTo()).ToList();
+            }
+        }
+        public User GetUserByLogin(string login)
+        {
+            using (AuctionContext db = new AuctionContext())
+            {
+                Microsoft.Data.SqlClient.SqlParameter param = new Microsoft.Data.SqlClient.SqlParameter("@Login", login);
+                UserDto user = db.Users.FromSqlRaw("spUsers_GetUserByLogin @Login", param).AsEnumerable().FirstOrDefault();
+                return user == null ? null : user.MapTo();
             }
         }
         public User Create(User tmp)

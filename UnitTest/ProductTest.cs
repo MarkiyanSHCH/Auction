@@ -17,7 +17,7 @@ namespace UnitTests
         [OneTimeSetUp]
         public void InitialSetupTest()
         {
-            productRep = new ProductController();
+            productRep = new ProductRepository();
         }
 
         [Test]

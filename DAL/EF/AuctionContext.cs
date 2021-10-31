@@ -16,7 +16,7 @@ namespace DAL.EF
         {
             try
             {
-                optionsBuilder.UseSqlServer(@"Server=.;Database=UserAuctionTest;Trusted_Connection=True;");//ConfigurationManager.ConnectionStrings["conn"].ConnectionString);
+                optionsBuilder.UseSqlServer(@"Server=.;Database=UserAuction;Trusted_Connection=True;");//ConfigurationManager.ConnectionStrings["conn"].ConnectionString);
             }
             catch (Exception e)
             {

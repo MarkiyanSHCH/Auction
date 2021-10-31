@@ -10,9 +10,16 @@ using DTO.Models;
 
 namespace DAL.Controller
 {
-    public class ProductController : IController<Product>
+    public class ProductRepository : IProductRepository
     {
-        public Product Get(int id)
+        public List<Product> GetAll()
+        {
+            using (AuctionContext db = new AuctionContext())
+            {
+                return db.Products.AsEnumerable().Select(dto => dto.MapTo()).ToList();
+            }
+        }
+        public Product GetById(int id)
         {
             using (AuctionContext db = new AuctionContext())
             {
@@ -35,13 +42,6 @@ namespace DAL.Controller
                 return db.Products.FromSqlRaw("ReadProductsByUser @id", param).AsEnumerable().Select(dto => dto.MapTo()).ToList();
             }
         }
-        public List<Product> GetAll()
-        {
-            using (AuctionContext db = new AuctionContext())
-            {
-                return db.Products.AsEnumerable().Select(dto => dto.MapTo()).ToList();
-            }
-        }
         public Product Create(Product tmp)
         {
             using (AuctionContext db = new AuctionContext())
@@ -56,16 +56,23 @@ namespace DAL.Controller
             using (AuctionContext db = new AuctionContext())
             {
                 ProductDto prod = db.Products.Where(x => x.Id == id).SingleOrDefault();
-                prod.Name = tmp.Name;
-                prod.Description = tmp.Description;
-                prod.Photo = tmp.Photo;
-                prod.FixPrice = tmp.FixPrice;
-                prod.AuctionPrice = tmp.AuctionPrice;
-                prod.Sell = tmp.Sell;
-                prod.StartDate = tmp.StartDate;
-                prod.EndDate = tmp.EndDate;
-                prod.CategoryId = tmp.CategoryId;
+                if (tmp.AuctionPrice != null)
+                    prod.AuctionPrice += tmp.AuctionPrice;
+                else
+                    prod.Sell = true;
                 prod.UserId = tmp.UserId;
+              
+                db.SaveChanges();
+            }
+        }
+
+        public void UpdateIfSold(int id)
+        {
+            using (AuctionContext db = new AuctionContext())
+            {
+                ProductDto prod = db.Products.Where(x => x.Id == id).SingleOrDefault();
+                prod.Sell = true;
+
                 db.SaveChanges();
             }
         }
