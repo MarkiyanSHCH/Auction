@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="CourseProjectWPF.Views.ProductView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CourseProjectWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Styles\ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="650"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="0"
+                  ItemsSource="{Binding Products}"
+                  SelectedItem="{Binding SelectedProduct}"
+                  SelectedIndex="{Binding SelectedProductIndex}" 
+                  AutoGenerateColumns="False"
+                  ColumnWidth="*"
+                  Height="Auto"
+                  Background="LightGray"
+                  IsReadOnly="True"
+                  IsEnabled="{Binding IsButtonsActive}">
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding IsYourBid}" />
+            </DataGrid.InputBindings>
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
+                <DataGridTextColumn Header="Fix Price" Binding="{Binding Path=FixPrice}"/>
+                <DataGridTextColumn Header="Auction Price" Binding="{Binding Path=AuctionPrice}"/>
+                <DataGridTextColumn Header="Start date" Binding="{Binding Path=StartDate}"/>
+                <DataGridTextColumn Header="End date" Binding="{Binding Path=EndDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="1"
+              Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" DataContext="{Binding SelectedProduct}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  Margin="5" FontSize="14" Foreground="Black" Text="Name: "/>
+                    <TextBlock FontSize="14" Foreground="Black" Text="{Binding Path=Name}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5"  FontSize="14" Foreground="Black" Text="Bid Price: "/>
+                    <TextBlock FontSize="14" Foreground="Black" Text="{Binding Path=AuctionPrice}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <Button Margin="5" 
+                        Content="Bid"
+                        Height="40" 
+                        Width="100" 
+                        Style="{StaticResource MenuButton}" 
+                        Command="{Binding MakeBid}"
+                        IsEnabled="{Binding IsButtonsActive}"/>
+                <Button Content="Buy now"
+                        Height="40" 
+                        Width="100"
+                        Style="{StaticResource MenuButton}" 
+                        Command="{Binding Buy}"
+                        IsEnabled="{Binding IsButtonsActive}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <TextBlock Margin="5"  FontSize="14" Foreground="Black" Text="Bid: "/>
+                <TextBlock Height="30" Width="100" Text="{Binding IsBidYourString}"/>
+            </StackPanel>
+            
+        </Grid>
+    </Grid>
+</UserControl>

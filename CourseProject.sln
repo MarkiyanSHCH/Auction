@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{40EAA672-9F21-4805-91AA-5D8621066E05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseProjectWF", "CourseProjectWF\CourseProjectWF.csproj", "{577C7D31-26DE-4C99-9622-3CB3CA664AC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseProjectWF", "CourseProjectWF\CourseProjectWF.csproj", "{577C7D31-26DE-4C99-9622-3CB3CA664AC1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseProjectWPF", "CourseProjectWPF\CourseProjectWPF.csproj", "{32EEC8DE-355B-467A-BAB0-FB217FF85CEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{577C7D31-26DE-4C99-9622-3CB3CA664AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{577C7D31-26DE-4C99-9622-3CB3CA664AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{577C7D31-26DE-4C99-9622-3CB3CA664AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32EEC8DE-355B-467A-BAB0-FB217FF85CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32EEC8DE-355B-467A-BAB0-FB217FF85CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32EEC8DE-355B-467A-BAB0-FB217FF85CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32EEC8DE-355B-467A-BAB0-FB217FF85CEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
